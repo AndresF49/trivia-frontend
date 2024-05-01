@@ -1,12 +1,13 @@
 import { Box, TextField, Button } from '@mui/material'
 import { useState } from 'react';
+import fetchUrl from '../util/fetchUrl';
 
 function Answer({ name }) {
   const [answer, setAnswer] = useState("");
 
   const submitClicked = async () => {
     try {
-      const res = await fetch("http://localhost:3000/addAnswer", {
+      const res = await fetch(fetchUrl + "/addAnswer", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -18,7 +19,8 @@ function Answer({ name }) {
       if (!res.ok) {
         throw new Error('Network response was not ok.');
       }
-      console.log(res);
+      // console.log(res);
+      setAnswer("");
 
     } catch (error) {
       console.error(error);
@@ -26,19 +28,17 @@ function Answer({ name }) {
   };
 
   return (
-    <>
-      <Box
-    component="form"
-    sx={{
-      '& > :not(style)': { m: 1, width: '25ch' },
-      display: 'flex',
-    }}
-    autoComplete="off"
-    >
-      <TextField id="answer" label="Your Answer" variant="outlined" onChange={(event) => setAnswer(event.target.value)} />
-      <Button variant="contained" onClick={submitClicked}>Submit</Button>
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        gap: '10px'
+      }}
+      autoComplete="off"
+      >
+      <TextField id="answer" label="Your Answer" variant="outlined" onChange={(event) => setAnswer(event.target.value)} value={answer} />
+      <Button variant="contained" disabled={answer === ""} onClick={submitClicked}>Submit</Button>
     </Box>
-    </>
   );
 };
 
