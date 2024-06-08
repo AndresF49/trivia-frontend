@@ -1,27 +1,43 @@
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
+import {
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 
 function AnswersTable({ data }) {
+  const columns = [
+    { id: "name", label: "Name" },
+    { id: "answer", label: "Answer" },
+  ];
+
   return (
-    <Table sx={{ maxWidth: "70vw" }} aria-label="simple table">
+    <Table sx={{ maxWidth: "70vw" }} aria-label="answers table">
       <TableHead>
         <TableRow>
-          <TableCell>Name</TableCell>
-          <TableCell align="right">Answer</TableCell>
+          {columns.map((column) => (
+            <TableCell key={column.id}>{column.label}</TableCell>
+          ))}
         </TableRow>
       </TableHead>
       <TableBody>
-        {data.map((row) => (
-          <TableRow key={row.name} sx={{}}>
-            <TableCell component="th" scope="row">
-              {row.name}
+        {data.length > 0 ? (
+          data.map((row) => (
+            <TableRow key={row.name}>
+              {columns.map((column) => (
+                <TableCell key={column.id}>{row[column.id]}</TableCell>
+              ))}
+            </TableRow>
+          ))
+        ) : (
+          <TableRow>
+            <TableCell colSpan={columns.length} align="center">
+              <Typography variant="h4">No items found</Typography>
             </TableCell>
-            <TableCell align="right">{row.answer}</TableCell>
           </TableRow>
-        ))}
+        )}
       </TableBody>
     </Table>
   );
