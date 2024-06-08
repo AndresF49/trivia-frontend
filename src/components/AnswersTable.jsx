@@ -1,11 +1,10 @@
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 
 function AnswersTable({ data }) {
-
   return (
     <Table sx={{ maxWidth: "70vw" }} aria-label="simple table">
       <TableHead>
@@ -16,8 +15,10 @@ function AnswersTable({ data }) {
       </TableHead>
       <TableBody>
         {data.map((row) => (
-          <TableRow key={row.name} sx={{ }}>
-            <TableCell component="th" scope="row">{row.name}</TableCell>
+          <TableRow key={row.name} sx={{}}>
+            <TableCell component="th" scope="row">
+              {row.name}
+            </TableCell>
             <TableCell align="right">{row.answer}</TableCell>
           </TableRow>
         ))}

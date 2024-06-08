@@ -3,14 +3,13 @@ import fetchUrl from "../util/fetchUrl";
 import { useEffect, useState } from "react";
 
 function AdminButtons({ setAnswersTable }) {
-
   return (
     <Box
-    sx={{
-      display: 'flex',
-      justifyContent: 'center',
-      gap: '10px'
-    }}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        gap: "10px",
+      }}
     >
       <p>admin buttons bar</p>
       <GetAnswers setAnswersTable={setAnswersTable} />
@@ -22,25 +21,25 @@ function AdminButtons({ setAnswersTable }) {
 }
 
 function GetAnswers({ setAnswersTable }) {
-
   const answersClicked = async () => {
     try {
       const res = await fetch(fetchUrl + "/getAnswers");
-  
+
       if (!res.ok) {
-        throw new Error('Network response was not ok.');
+        throw new Error("Network response was not ok.");
       }
       // console.log(res);
       const data = await res.json();
       setAnswersTable(data);
-
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <Button variant="contained" onClick={answersClicked}>Get Answers</Button>
+    <Button variant="contained" onClick={answersClicked}>
+      Get Answers
+    </Button>
   );
 }
 
@@ -48,21 +47,22 @@ function ClearAll() {
   const clearAllClicked = async () => {
     try {
       const res = await fetch(fetchUrl + "/clearAll");
-  
+
       if (!res.ok) {
-        throw new Error('Network response was not ok.');
+        throw new Error("Network response was not ok.");
       }
       // console.log(res);
       const data = await res.json();
       alert(data.message);
-
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <Button variant="contained" onClick={clearAllClicked}>Clear Names and Answers</Button>
+    <Button variant="contained" onClick={clearAllClicked}>
+      Clear Names and Answers
+    </Button>
   );
 }
 
@@ -70,21 +70,22 @@ function ClearAnswers() {
   const clearAnswers = async () => {
     try {
       const res = await fetch(fetchUrl + "/clearAnswers");
-  
+
       if (!res.ok) {
-        throw new Error('Network response was not ok.');
+        throw new Error("Network response was not ok.");
       }
       // console.log(res);
       const data = await res.json();
       alert(data.message);
-
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <Button variant="contained" onClick={clearAnswers}>Clear Answers</Button>
+    <Button variant="contained" onClick={clearAnswers}>
+      Clear Answers
+    </Button>
   );
 }
 
@@ -95,26 +96,25 @@ function AddScore() {
 
   useEffect(() => {
     getNames();
-  },[]);
+  }, []);
 
   const addScoreClicked = async () => {
     try {
       const res = await fetch(fetchUrl + "/addScore", {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
         // body: JSON.stringify(answer)
-        body: `{ "name": "${name}", "score": "${score}" }`
+        body: `{ "name": "${name}", "score": "${score}" }`,
       });
-  
+
       if (!res.ok) {
-        throw new Error('Network response was not ok.');
+        throw new Error("Network response was not ok.");
       }
       // console.log(res);
       const data = await res.json();
       alert(data.message);
-
     } catch (error) {
       console.error(error);
     }
@@ -123,14 +123,13 @@ function AddScore() {
   const getNames = async () => {
     try {
       const res = await fetch(fetchUrl + "/getAnswers");
-  
+
       if (!res.ok) {
-        throw new Error('Network response was not ok.');
+        throw new Error("Network response was not ok.");
       }
       // console.log(res);
       const data = await res.json();
-      setNameList(data.map(row => row.name));
-
+      setNameList(data.map((row) => row.name));
     } catch (error) {
       console.error(error);
     }
@@ -154,7 +153,9 @@ function AddScore() {
         <MenuItem value={20}>Twenty</MenuItem>
         <MenuItem value={30}>Thirty</MenuItem> */}
       </Select>
-      <Button variant="contained" onClick={addScoreClicked}>Add Score</Button>
+      <Button variant="contained" onClick={addScoreClicked}>
+        Add Score
+      </Button>
     </>
   );
 }
